@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Smart Healthcare</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#f4f7f9; color:#333; display:flex; flex-direction:column; min-height:100vh; }
+
+    /* Navbar */
+    header {
+      background:#fff;
+      padding:20px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    header h1 { font-size:28px; color:#0072ff; }
+    nav a {
+      margin-left:25px;
+      text-decoration:none;
+      color:#555;
+      font-weight:500;
+      transition:color 0.3s;
+    }
+    nav a:hover { color:#0072ff; }
+
+    /* Login Section */
+    .login-container {
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:60px 20px;
+    }
+    .login-card {
+      background:#fff;
+      padding:40px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      max-width:400px;
+      width:100%;
+      text-align:center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .login-card h2 {
+      margin-bottom:20px;
+      color:#0072ff;
+    }
+    .login-card label {
+      display:block;
+      text-align:left;
+      margin-bottom:8px;
+      font-weight:500;
+    }
+    .login-card input, .login-card select {
+      width:100%;
+      padding:12px;
+      margin-bottom:20px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:16px;
+    }
+    .login-card input:focus {
+      outline:none;
+      border-color:#0072ff;
+      box-shadow:0 0 5px rgba(0,114,255,0.5);
+    }
+    .btn {
+      display:inline-block;
+      padding:12px 30px;
+      border-radius:8px;
+      background:#0072ff;
+      color:#fff;
+      font-weight:bold;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+      transition:0.3s;
+    }
+    .btn:hover {
+      background:#005ac1;
+      transform: translateY(-2px);
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(20px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    footer {
+      text-align:center;
+      padding:20px;
+      color:#777;
+      font-size:14px;
+      background:#fff;
+      box-shadow:0 -2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* Message */
+    .message {
+      margin-top:15px;
+      font-size:14px;
+      font-weight:500;
+      color:red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>Smart Healthcare</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('appointment_page') }}">Book Appointment</a>
+      <a href="{{ url_for('chatbot_page') }}">Ayurveda Chatbot</a>
+    </nav>
+  </header>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Login</h2>
+      <form action="{{ url_for('login') }}" method="POST">
+        <label for="role">Login As</label>
+        <select id="role" name="role" required>
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+        </select>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit" class="btn">Login</button>
+      </form>
+
+      {% if message %}
+      <p class="message">{{ message }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>© 2025 Smart Healthcare | Crafted with care by Shivam & Team</footer>
+</body>
+</html>

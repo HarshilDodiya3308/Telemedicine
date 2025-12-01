@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Tele-Appointment — Telemedicine Nabha</title>
+  
+  <!-- Poppins font + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#f4f7f9; color:#333; display:flex; flex-direction:column; min-height:100vh; }
+
+    /* Navbar */
+    header {
+      background:#fff;
+      padding:15px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo h1 { 
+      font-size:28px; 
+      color:#0b64e7; 
+      font-weight: 700;
+    }
+    
+    .logo i {
+      font-size: 32px;
+      color: #0b64e7;
+    }
+    
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+    
+    nav a {
+      text-decoration:none;
+      color:#555;
+      font-weight:500;
+      transition:color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    nav a:hover { color:#0b64e7; }
+    
+    nav a i {
+      font-size: 18px;
+    }
+
+    /* Booking Section */
+    .booking-container {
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:60px 20px;
+    }
+    
+    .booking-card {
+      background:#fff;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      max-width:500px;
+      width:100%;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    .booking-card h2 { 
+      margin-bottom:25px; 
+      color:#0b64e7; 
+      text-align:center;
+      font-size: 2rem;
+    }
+    
+    label { 
+      display:block; 
+      margin-bottom:8px; 
+      font-weight:600;
+      color: #444;
+    }
+    
+    input, select {
+      width:100%; 
+      padding:14px; 
+      margin-bottom:20px;
+      border-radius:8px; 
+      border:1px solid #ddd; 
+      font-size:16px;
+      transition: all 0.3s;
+    }
+    
+    input:focus, select:focus {
+      outline:none; 
+      border-color:#0b64e7;
+      box-shadow:0 0 0 3px rgba(11,100,231,0.15);
+    }
+    
+    input[readonly] { 
+      background:#f8f9fa; 
+      color:#555; 
+      cursor: not-allowed;
+    }
+    
+    .btn {
+      display:inline-block; 
+      padding:16px 30px; 
+      border-radius:8px;
+      background:#0b64e7; 
+      color:#fff; 
+      font-weight:600;
+      border:none; 
+      cursor:pointer; 
+      transition:all 0.3s; 
+      width:100%;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn:hover { 
+      background:#074eb4; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(11, 100, 231, 0.3);
+    }
+    
+    .btn:disabled { 
+      background:#ccc; 
+      cursor:not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .message { 
+      text-align:center; 
+      margin:15px 0 5px; 
+      font-weight:500;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    
+    .success { 
+      color: #2e7d32; 
+      background-color: #edf7ed;
+    }
+    
+    .error { 
+      color: #d32f2f; 
+      background-color: #fdeaea;
+    }
+
+    @keyframes fadeIn { 
+      from { opacity:0; transform: translateY(20px);} 
+      to { opacity:1; transform: translateY(0);} 
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .copyright {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .booking-container {
+        padding: 40px 15px;
+      }
+      
+      .booking-card {
+        padding: 25px;
+      }
+      
+      .booking-card h2 {
+        font-size: 1.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 24px;
+      }
+      
+      nav a {
+        font-size: 14px;
+      }
+      
+      .btn {
+        padding: 14px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-stethoscope"></i>
+      <h1>Telemedicine </h1>
+    </div>
+    <nav>
+      <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a>
+      <a href="{{ url_for('doctors_page') }}"><i class="fas fa-user-md"></i> Doctors</a>
+      <a href="{{ url_for('chatbot_health') }}"><i class="fas fa-robot"></i> Health Assistant</a>
+      <a href="{{ url_for('chatbot_medicine') }}"><i class="fas fa-user-plus"></i> Medicine Advisor</a>
+      {% if user_name %}
+        <a href="{{ url_for('logout') }}" style="color:#dc3545;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <!-- Booking Section -->
+  <div class="booking-container">
+    <div class="booking-card">
+      <h2><i class="fas fa-calendar-check"></i> Book Tele-Appointment</h2>
+      
+      {% if message %}
+        <p class="message {{ 'success' if 'success' in message|lower else 'error' }}">{{ message }}</p>
+      {% endif %}
+
+      <form action="{{ url_for('appointment_page') }}" method="POST" id="appointment-form">
+        {% if prefilled %}
+          <!-- Prefilled mode (from Doctors page) -->
+          <input type="hidden" name="doctor_id" value="{{ doctor_id }}">
+
+          <label for="doctor">Doctor</label>
+          <input type="text" id="doctor" value="{{ doctor_name }}" readonly>
+
+          <label for="specialization">Specialization</label>
+          <input type="text" id="specialization" value="{{ specialization }}" readonly>
+        {% else %}
+          <!-- Full mode (from Home page) -->
+          <label for="specialization">Select Specialization</label>
+          <select id="specialization" name="specialization" required onchange="loadDoctors()">
+            <option value="">-- Choose Specialization --</option>
+            {% for spec in specializations %}
+              <option value="{{ spec }}">{{ spec }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="doctor">Select Doctor</label>
+          <select id="doctor" name="doctor_id" required disabled>
+            <option value="">-- Choose Doctor --</option>
+          </select>
+        {% endif %}
+
+        <label for="date">Select Date</label>
+        <input type="date" id="date" name="date" required min="{{ min_date }}">
+
+        <label for="time">Select Time</label>
+        <input type="time" id="time" name="time" required>
+
+        <button type="submit" class="btn" id="submit-btn">
+          <i class="fas fa-calendar-plus"></i> Book Appointment
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="copyright">© 2025 Telemedicine Nabha | Providing healthcare access to rural communities</div>
+  </footer>
+
+  {% if not prefilled %}
+  <script>
+    async function loadDoctors() {
+      const specialization = document.getElementById("specialization").value;
+      const doctorSelect = document.getElementById("doctor");
+      
+      // Clear and disable doctor dropdown if no specialization selected
+      if (!specialization) {
+        doctorSelect.innerHTML = '<option value="">-- Choose Doctor --</option>';
+        doctorSelect.disabled = true;
+        return;
+      }
+      
+      doctorSelect.innerHTML = '<option value="">Loading doctors...</option>';
+      doctorSelect.disabled = true;
+      
+      try {
+        const response = await fetch(`{{ url_for('get_doctors_by_specialization') }}?specialization=${encodeURIComponent(specialization)}`);
+        const data = await response.json();
+        
+        if (data.doctors && data.doctors.length > 0) {
+          doctorSelect.innerHTML = '<option value="">-- Choose Doctor --</option>';
+          data.doctors.forEach(doctor => {
+            const option = document.createElement("option");
+            option.value = doctor.id;
+            option.textContent = `${doctor.name} (${doctor.specialization})`;
+            doctorSelect.appendChild(option);
+          });
+          doctorSelect.disabled = false;
+        } else {
+          doctorSelect.innerHTML = '<option value="">No doctors available for this specialization</option>';
+        }
+      } catch (error) {
+        console.error('Error loading doctors:', error);
+        doctorSelect.innerHTML = '<option value="">Error loading doctors. Please try again.</option>';
+      }
+    }
+    
+    // Set minimum time to current time if today is selected
+    document.getElementById('date').addEventListener('change', function() {
+      const selectedDate = new Date(this.value);
+      const today = new Date();
+      
+      // If selected date is today, set min time to current time
+      if (selectedDate.toDateString() === today.toDateString()) {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById('time').min = `${hours}:${minutes}`;
+      } else {
+        document.getElementById('time').removeAttribute('min');
+      }
+    });
+  </script>
+  {% endif %}
+</body>
+</html>

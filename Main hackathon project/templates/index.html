@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Telemedicine Access for Rural Healthcare in Nabha — book remote consultations, find local doctors, and access rural health services." />
+  <title>Telemedicine Access for Rural Healthcare in Nabha</title>
+
+  <!-- Poppins font + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#f4f7f9; color:#333; }
+
+    /* Header & Navigation */
+    header {
+      background:#fff;
+      padding:15px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo h1 { 
+      font-size:28px; 
+      color:#0b64e7; 
+      font-weight: 700;
+    }
+    
+    .logo i {
+      font-size: 32px;
+      color: #0b64e7;
+    }
+    
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+    
+    nav a {
+      text-decoration:none;
+      color:#555;
+      font-weight:500;
+      transition:color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    nav a:hover { color:#0b64e7; }
+    
+    nav a i {
+      font-size: 18px;
+    }
+
+    /* Hero Section */
+    .hero {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:80px 50px;
+      flex-wrap:wrap;
+      background: linear-gradient(135deg, #e3f2fd, #cfe8ff);
+      min-height: 80vh;
+    }
+    
+    .hero-content { 
+      max-width:50%; 
+      min-width:300px; 
+    }
+    
+    .hero h2 { 
+      font-size:3.5rem; 
+      color:#0b64e7; 
+      margin-bottom:20px; 
+      line-height: 1.2;
+    }
+    
+    .hero p { 
+      font-size:1.2rem; 
+      line-height:1.6; 
+      margin-bottom:30px; 
+      color: #4a4a4a;
+    }
+    
+    .cta { 
+      display:flex; 
+      gap:20px; 
+      flex-wrap:wrap; 
+    }
+    
+    .btn {
+      padding:14px 30px;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:600;
+      transition:all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary { 
+      background:#0b64e7; 
+      color:#fff; 
+    }
+    
+    .btn-primary:hover { 
+      background:#074eb4; 
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(11, 100, 231, 0.3);
+    }
+    
+    .btn-secondary { 
+      background:#fff; 
+      color:#333; 
+      border:2px solid #e5e7eb; 
+    }
+    
+    .btn-secondary:hover { 
+      background:#f4f6fb; 
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* New button styles for Health Assistant and Medicine Advisor */
+    .btn-assistant {
+      background: #28a745;
+      color: #fff;
+    }
+    
+    .btn-assistant:hover {
+      background: #218838;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .btn-advisor {
+      background: #6f42c1;
+      color: #fff;
+    }
+    
+    .btn-advisor:hover {
+      background: #5a359c;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(111, 66, 193, 0.3);
+    }
+
+    /* Hero Image */
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .hero-image img {
+      max-width:100%;
+      border-radius:20px;
+      box-shadow:0 15px 30px rgba(0,0,0,0.2);
+      transition: transform 0.5s;
+    }
+    
+    .hero-image img:hover { 
+      transform: scale(1.03); 
+    }
+
+    /* Features Section */
+    .features {
+      padding:80px 50px;
+      background:#fff;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: #0b64e7;
+      margin-bottom: 15px;
+    }
+    
+    .section-title p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cards {
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      flex-wrap:wrap;
+    }
+    
+    .card {
+      flex:1;
+      min-width:280px;
+      max-width:350px;
+      background:#fff;
+      padding:30px;
+      border-radius:15px;
+      text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      transition:transform 0.3s, box-shadow 0.3s;
+      border-top: 4px solid #0b64e7;
+    }
+    
+    .card:hover {
+      transform:translateY(-10px);
+      box-shadow:0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .card i {
+      font-size: 50px;
+      color: #0b64e7;
+      margin-bottom: 20px;
+    }
+    
+    .card h3 { 
+      margin-bottom:15px; 
+      color:#0b64e7; 
+      font-size: 1.5rem;
+    }
+    
+    .card p { 
+      margin-bottom:20px; 
+      font-size:16px; 
+      color:#575757; 
+    }
+
+    /* Find Doctors Section Styles */
+    .find-doctors {
+      background: linear-gradient(135deg, #0b64e7, #4e54c8);
+      padding: 80px 50px;
+      color: white;
+      text-align: center;
+    }
+    
+    .doctor-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      max-width: 300px;
+      transition: transform 0.3s;
+    }
+    
+    .doctor-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Articles Section */
+    .articles {
+      background:#fff;
+      padding:80px 50px;
+    }
+    
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap:30px;
+    }
+    
+    .article-card {
+      background:#fafafa;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.08);
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .article-card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .article-img {
+      height:200px;
+      overflow: hidden;
+    }
+    
+    .article-img img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition: transform 0.5s;
+    }
+    
+    .article-card:hover .article-img img {
+      transform: scale(1.05);
+    }
+    
+    .article-content {
+      padding:20px;
+    }
+    
+    .article-content .category {
+      font-size:14px;
+      font-weight:bold;
+      color:#28a745;
+      display:block;
+      margin-bottom:10px;
+    }
+    
+    .article-content h3 {
+      font-size:1.3rem;
+      margin-bottom:10px;
+      color:#333;
+    }
+    
+    .article-content p {
+      font-size:14px;
+      color:#666;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    
+    .testimonials h2 {
+      font-size: 2.5rem;
+      color: #0b64e7;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .testimonials h2:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: #0b64e7;
+      border-radius: 3px;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+      width: 100%;
+    }
+    
+    .testimonial-card {
+      min-width: 100%;
+      box-sizing: border-box;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      position: relative;
+    }
+    
+    .testimonial-card:before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 60px;
+      color: #0b64e7;
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+    
+    .testimonial-card p {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      color: #444;
+      font-style: italic;
+      text-align: left;
+      padding: 0 20px;
+    }
+    
+    .user-info {
+      font-weight: 600;
+      color: #0b64e7;
+      font-size: 16px;
+      text-align: right;
+    }
+    
+    .user-info:before {
+      content: "— ";
+    }
+    
+    /* Navigation buttons */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #0b64e7;
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    
+    .prev:hover, .next:hover {
+      background: #074eb4;
+      transform: translateY(-50%) scale(1.05);
+    }
+    
+    .prev {
+      left: 20px;
+    }
+    
+    .next {
+      right: 20px;
+    }
+    
+    /* Dots indicator */
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 10px;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .dot.active {
+      background: #0b64e7;
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 50px 20px 20px;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #8ec5ff;
+    }
+    
+    .footer-column p, .footer-column a {
+      color: #bbb;
+      margin-bottom: 10px;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-column a:hover {
+      color: #fff;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: #0b64e7;
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      border-top: 1px solid #444;
+      padding-top: 20px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 30px;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+        margin-bottom: 40px;
+      }
+      
+      .cta {
+        justify-content: center;
+      }
+      
+      .hero-image {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      .features, .articles, .find-doctors {
+        padding: 60px 20px;
+      }
+      
+      .testimonial-card {
+        padding: 30px 20px;
+      }
+      
+      .testimonial-card p {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+      
+      .prev, .next {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .prev {
+        left: 10px;
+      }
+      
+      .next {
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-stethoscope"></i>
+      <h1>Telemedicine </h1>
+    </div>
+    <nav>
+      {% if user_name %}
+        <a href="{{ url_for('doctors_page') }}"><i class="fas fa-user-md"></i> Find Doctors</a>
+        <a href="{{ url_for('appointment_page') }}"><i class="fas fa-calendar-check"></i> Appointments</a>
+        <a href="{{ url_for('chatbot_health') }}"><i class="fas fa-robot"></i> Health Assistant</a>
+        <a href="{{ url_for('chatbot_medicine') }}"><i class="fas fa-user-plus"></i> Medicine Advisor</a>
+        <a href="{{ url_for('logout') }}" style="color:#dc3545; font-weight:600;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      {% else %}
+        <a href="{{ url_for('doctors_page') }}"><i class="fas fa-user-md"></i> Find Doctors</a>
+        <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="{{ url_for('appointment_page') }}"><i class="fas fa-calendar-check"></i> Appointments</a>
+        <a href="{{ url_for('chatbot_health') }}"><i class="fas fa-robot"></i> Health chatbot</a>
+        <a href="{{ url_for('chatbot_medicine') }}"><i class="fas fa-user-plus"></i> chatbot_medicine</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      {% if user_name %}
+        <h2>Welcome, {{ user_name }}!</h2>
+        <p>Connect with doctors remotely and access community healthcare services across Nabha's villages.</p>
+      {% else %}
+        <h2>Telemedicine </h2>
+        <p>Book remote consultations, find nearby clinics, and get reliable health guidance made for villages and blocks around Nabha.</p>
+      {% endif %}
+      <div class="cta">
+        <a href="{{ url_for('appointment_page') }}" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Tele-Appointment</a>
+        <a href="{{ url_for('doctors_page') }}" class="btn btn-secondary"><i class="fas fa-user-md"></i> Find Local Doctors</a>
+        <a href="{{ url_for('chatbot_health') }}" class="btn btn-assistant"><i class="fas fa-robot"></i> Health Assistant</a>
+        <a href="{{ url_for('chatbot_medicine') }}" class="btn btn-advisor"><i class="fas fa-pills"></i> Medicine Advisor</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="{{ url_for('static', filename='Siddha.jpg') }}" alt="Telemedicine in Rural Nabha" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="section-title">
+      <h2>Why Telemedicine Nabha?</h2>
+      <p>Designed for rural communities — quick access to verified doctors, affordable care, and remote follow-ups that reduce travel.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-headset"></i>
+        <h3>Remote Consultations</h3>
+        <p>Meet doctors through video/phone and get prescriptions without long travel.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-rupee-sign"></i>
+        <h3>Affordable Care</h3>
+        <p>Transparent fees and low-data options that work on basic smartphones.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-map-marked-alt"></i>
+        <h3>Made for Nabha</h3>
+        <p>Filters by village/block and connects you to nearby clinics and specialists.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Find Doctors Section -->
+  <section class="find-doctors">
+    <div class="section-title">
+      <h2 style="color: white;">Find the Right Doctor Near You</h2>
+      <p>Search by specialization, experience, and proximity to your village.</p>
+    </div>
+    
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
+      <div class="doctor-card">
+        <i class="fas fa-search" style="font-size: 40px; margin-bottom: 20px;"></i>
+        <h3 style="margin-bottom: 15px;">Search Specialties</h3>
+        <p>General, Pediatrics, Cardiology, and more.</p>
+      </div>
+      
+      <div class="doctor-card">
+        <i class="fas fa-map-marker-alt" style="font-size: 40px; margin-bottom: 20px;"></i>
+        <h3 style="margin-bottom: 15px;">Filter by Location</h3>
+        <p>Villages & blocks around Nabha.</p>
+      </div>
+      
+      <div class="doctor-card">
+        <i class="fas fa-receipt" style="font-size: 40px; margin-bottom: 20px;"></i>
+        <h3 style="margin-bottom: 15px;">Clear Pricing</h3>
+        <p>Know consultation fees upfront.</p>
+      </div>
+    </div>
+    
+    <a href="{{ url_for('doctors_page') }}" class="btn btn-primary" style="margin-top: 40px; background: white; color: #0b64e7; font-size: 18px; padding: 15px 30px;">
+      <i class="fas fa-search"></i> Browse All Doctors
+    </a>
+  </section>
+
+  <!-- Articles Section -->
+  <section class="articles">
+    <div class="section-title">
+      <h2>Health Articles & Tips</h2>
+      <p>Stay informed with trusted advice on Ayurveda, immunity, diet, and healthy living</p>
+    </div>
+
+    <div class="articles-grid">
+      <!-- Article 1 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download.png') }}" alt="Article 1" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🦠 Coronavirus</span>
+          <h3>12 Coronavirus Myths and Facts You Should Be Aware Of</h3>
+          <p>By Dr. Diana Borgio</p>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download2.jpg') }}" alt="Article 2" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🥗 Vitamins & Immunity</span>
+          <h3>Eating Right to Build Immunity Against Cold and Infections</h3>
+          <p>By Dr. Diana Borgio</p>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download3.jpg') }}" alt="Article 3" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🌿 Ayurveda</span>
+          <h3>Top 5 Ayurvedic Remedies for Stress Relief</h3>
+          <p>By Dr. Arjun Mehta</p>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download4.jpg') }}" alt="Article 4" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🧘 Wellness</span>
+          <h3>How Yoga Boosts Mental Health</h3>
+          <p>By Dr. Kavita Sharma</p>
+        </div>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download5.jpg') }}" alt="Article 5" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🍵 Herbal Remedies</span>
+          <h3>7 Herbal Teas to Boost Digestion Naturally</h3>
+          <p>By Dr. Ananya Rao</p>
+        </div>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='images.jpg') }}" alt="Article 6" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">😴 Sleep & Wellness</span>
+          <h3>Ayurvedic Tips for Better Sleep</h3>
+          <p>By Dr. Rakesh Menon</p>
+        </div>
+      </div>
+
+      <!-- Article 7 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download.10.jpg') }}" alt="Article 7" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">💪 Fitness</span>
+          <h3>Morning Yoga Poses to Energize Your Day</h3>
+          <p>By Dr. Kavita Sharma</p>
+        </div>
+      </div>
+
+      <!-- Article 8 -->
+      <div class="article-card">
+        <div class="article-img">
+          <img src="{{ url_for('static', filename='download6.jpg') }}" alt="Article 8" loading="lazy">
+        </div>
+        <div class="article-content">
+          <span class="category">🥬 Nutrition</span>
+          <h3>Top 10 Superfoods for Immunity</h3>
+          <p>By Dr. Arjun Mehta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" aria-label="User testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-slider" tabindex="0" aria-roledescription="carousel">
+      <div class="testimonial-track">
+        <div class="testimonial-card" role="group" aria-roledescription="slide" aria-label="Slide 1 of 4">
+          <p>"Very easy to book and maintain history. Hassle-free compared to older methods. Thanks Smart Healthcare for making it simple."</p>
+          <div class="user-info">Jyothi Bhatia</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-roledescription="slide" aria-label="Slide 2 of 4">
+          <p>"The Ayurveda chatbot suggested simple remedies for my cold, and they worked! Highly recommended."</p>
+          <div class="user-info">Ramesh Kumar</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-roledescription="slide" aria-label="Slide 3 of 4">
+          <p>"I booked my doctor's appointment in under 2 minutes. The reminders were super helpful too. Very convenient."</p>
+          <div class="user-info">Neha Sharma</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-roledescription="slide" aria-label="Slide 4 of 4">
+          <p>"Great platform! The articles are insightful, and I love learning new health tips daily."</p>
+          <div class="user-info">Arjun Mehta</div>
+        </div>
+      </div>
+
+      <button class="prev" aria-label="Previous testimonial" tabindex="0">❮</button>
+      <button class="next" aria-label="Next testimonial" tabindex="0">❯</button>
+    </div>
+
+    <div class="testimonial-dots" role="tablist" aria-label="Testimonial navigation">
+      <span class="dot active" data-index="0" role="tab" aria-selected="true" tabindex="0"></span>
+      <span class="dot" data-index="1" role="tab" aria-selected="false" tabindex="0"></span>
+      <span class="dot" data-index="2" role="tab" aria-selected="false" tabindex="0"></span>
+      <span class="dot" data-index="3" role="tab" aria-selected="false" tabindex="0"></span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Telemedicine Nabha</h3>
+        <p>Providing accessible healthcare solutions for rural communities in and around Nabha through telemedicine technology.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('doctors_page') }}">Find Doctors</a>
+        <a href="{{ url_for('appointment_page') }}">Appointments</a>
+        <a href="{{ url_for('chatbot_health') }}">Health Assistant</a>
+        <a href="{{ url_for('chatbot_medicine') }}">Medicine Advisor</a>
+        <a href="{{ url_for('login') }}">Login</a>
+      </div>
+      <div class="footer-column">
+        <h3>Services</h3>
+        <a href="#">Teleconsultations</a>
+        <a href="#">Local Doctor Search</a>
+        <a href="#">Health Assistant</a>
+        <a href="#">Rural Health Programs</a>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Nabha Main Road, Nabha, Punjab</p>
+        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@telemedicinenabha.com</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 Telemedicine Nabha | Providing healthcare access to rural communities</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const slider = document.querySelector('.testimonial-slider');
+      const track = document.querySelector('.testimonial-track');
+      const slides = Array.from(document.querySelectorAll('.testimonial-card'));
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      let index = 0;
+      let slideInterval = null;
+
+      if (!track || slides.length === 0) return;
+
+      function updateDots() {
+        dots.forEach((d, i) => {
+          d.classList.toggle('active', i === index);
+          d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+      }
+
+      function showSlide(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        updateDots();
+      }
+
+      function startAuto() {
+        stopAuto();
+        slideInterval = setInterval(() => showSlide(index + 1), 5000);
+      }
+
+      function stopAuto() {
+        if (slideInterval) {
+          clearInterval(slideInterval);
+          slideInterval = null;
+        }
+      }
+
+      // Initialize
+      showSlide(0);
+      startAuto();
+
+      // Prev / Next handlers
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          stopAuto();
+          showSlide(index - 1);
+          startAuto();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          stopAuto();
+          showSlide(index + 1);
+          startAuto();
+        });
+      }
+
+      // Dots navigation
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) {
+            stopAuto();
+            showSlide(idx);
+            startAuto();
+          }
+        });
+
+        // keyboard nav for dots
+        dot.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dot.click();
+          }
+        });
+      });
+
+      // Pause on hover / focus
+      if (slider) {
+        slider.addEventListener('mouseenter', stopAuto);
+        slider.addEventListener('mouseleave', startAuto);
+        slider.addEventListener('focusin', stopAuto);
+        slider.addEventListener('focusout', startAuto);
+      }
+
+      // Keyboard navigation (global)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          stopAuto();
+          showSlide(index - 1);
+          startAuto();
+        } else if (e.key === 'ArrowRight') {
+          stopAuto();
+          showSlide(index + 1);
+          startAuto();
+        }
+      });
+
+      // Touch / swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          stopAuto();
+          if (diff > 0) {
+            showSlide(index - 1);
+          } else {
+            showSlide(index + 1);
+          }
+          startAuto();
+        }
+      });
+
+      // Smooth scrolling for in-page anchors
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').slice(1);
+          if (!targetId) return;
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
