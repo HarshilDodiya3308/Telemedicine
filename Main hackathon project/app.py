@@ -323,3 +323,5 @@ def doctors_page():
 
     cursor = db.cursor(cursor_factory=RealDictCursor)
     cursor.execute(query + ";", tuple(params))
+if __name __ == '__main__':
+    app.run(debug=True)
