@@ -23,7 +23,7 @@ CORS(app)
 # ---------- DB connection ----------
 # 💡 टिप: "यहाँ_अपना_External_Database_URL_पेस्ट_करें" की जगह Render से मिला URL पेस्ट करें।
 # उदाहरण के लिए: "postgresql://telemedicine_db_user:password@hostname/telemedicine_db"
-DATABASE_URL = "यहाँ_अपना_External_Database_URL_पेस्ट_करें"
+DATABASE_URL = "postgresql://telemedicine_db_vnuk_user:2Iu3phQzrNlWs0BN0Klem4MmwR75ZzEc@dpg-db1q95u0tbcc73c14k1g-a.oregon-postgres.render.com/telemedicine_db_vnuk"
 
 db = psycopg2.connect(DATABASE_URL)
 
