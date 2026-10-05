@@ -26,7 +26,53 @@ CORS(app)
 DATABASE_URL = "postgresql://telemedicine_db_vnuk_user:2Iu3phQzrNlWs0BN0Klem4MmwR75ZzEc@dpg-db1q95u0tbcc73c14k1g-a.oregon-postgres.render.com/telemedicine_db_vnuk"
 
 db = psycopg2.connect(DATABASE_URL)
-
+# ऑटोमैटिक टेबल्स बनाने और सैंपल डॉक्टर जोड़ने का कोड
+with db.cursor() as setup_cursor:
+    # 1) users टेबल
+    setup_cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100),
+            email VARCHAR(100) UNIQUE,
+            password VARCHAR(100),
+            role VARCHAR(20)
+        );
+    """)
+    # 2) doctors टेबल
+    setup_cursor.execute("""
+        CREATE TABLE IF NOT EXISTS doctors (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100),
+            email VARCHAR(100) UNIQUE,
+            password VARCHAR(100),
+            specialization VARCHAR(100),
+            hospital_name VARCHAR(150),
+            city VARCHAR(100),
+            area VARCHAR(100),
+            experience INT,
+            latitude DECIMAL(10,7),
+            longitude DECIMAL(10,7)
+        );
+    """)
+    # 3) appointments टेबल
+    setup_cursor.execute("""
+        CREATE TABLE IF NOT EXISTS appointments (
+            id SERIAL PRIMARY KEY,
+            patient_id INT,
+            doctor_id INT,
+            date DATE,
+            time TIME,
+            status VARCHAR(50)
+        );
+    """)
+    # 4) सैंपल डॉक्टर जोड़ना (अगर टेबल खाली है)
+    setup_cursor.execute("SELECT COUNT(*) FROM doctors;")
+    if setup_cursor.fetchone()[0] == 0:
+        setup_cursor.execute("""
+            INSERT INTO doctors (name, specialization, hospital_name, city, area) 
+            VALUES ('Dr. Rahul Khanna', 'Oncologist', 'Smile Dental Studio', 'Ahmedabad', 'Memnagar');
+        """)
+    db.commit()
 # ⚠️ ध्यान दें: PostgreSQL के क्वेरीज़ में %s के लिए वेरिएबल्स को टुपल (Tuple) में पास करना ज़रूरी है।
 
 # Helper functions
