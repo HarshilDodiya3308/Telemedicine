@@ -19,7 +19,7 @@ app.secret_key = "supersecretkey"
 CORS(app)
 
 # ---------- DB connection ----------
-DATABASE_URL = "postgresql://telemedicine_db_db_user:password@ep-safe-hill-a1b2c3.ap-southeast-1.aws.neon.tech/telemedicine_db"
+DATABASE_URL = "postgresql://telemedicine_db_vnuk_user:2Iu3phQzrNlWs0BN0Klem4MmwR75ZzEc@dpg-db1q95u0tbcc73c14k1g-a.oregon-postgres.render.com/telemedicine_db_vnuk"
 db = psycopg2.connect(DATABASE_URL)
 
 # ऑटोमैटिक टेबल्स सेटअप
