@@ -6,14 +6,12 @@ from flask_cors import CORS
 from geopy.geocoders import Nominatim
 from dotenv import load_dotenv
 import google.generativeai as genai
-
-# ✅ MySQL की जगह PostgreSQL लाइब्रेरी और डिक्शनरी कर्सर इम्पोर्ट किया
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
 # ---------- Gemini Setup ----------
-load_dotenv()  # load from .env file
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))  # ✅ set once globally
+load_dotenv()
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # ---------- Flask App Setup ----------
 app = Flask(__name__)
@@ -21,14 +19,11 @@ app.secret_key = "supersecretkey"
 CORS(app)
 
 # ---------- DB connection ----------
-# 💡 टिप: "यहाँ_अपना_External_Database_URL_पेस्ट_करें" की जगह Render से मिला URL पेस्ट करें।
-# उदाहरण के लिए: "postgresql://telemedicine_db_user:password@hostname/telemedicine_db"
-DATABASE_URL = "postgresql://telemedicine_db_vnuk_user:2Iu3phQzrNlWs0BN0Klem4MmwR75ZzEc@dpg-db1q95u0tbcc73c14k1g-a.oregon-postgres.render.com/telemedicine_db_vnuk"
-
+DATABASE_URL = "postgresql://telemedicine_db_db_user:password@ep-safe-hill-a1b2c3.ap-southeast-1.aws.neon.tech/telemedicine_db"
 db = psycopg2.connect(DATABASE_URL)
-# ऑटोमैटिक टेबल्स बनाने और सैंपल डॉक्टर जोड़ने का कोड
+
+# ऑटोमैटिक टेबल्स सेटअप
 with db.cursor() as setup_cursor:
-    # 1) users टेबल
     setup_cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
@@ -38,7 +33,6 @@ with db.cursor() as setup_cursor:
             role VARCHAR(20)
         );
     """)
-    # 2) doctors टेबल
     setup_cursor.execute("""
         CREATE TABLE IF NOT EXISTS doctors (
             id SERIAL PRIMARY KEY,
@@ -54,7 +48,6 @@ with db.cursor() as setup_cursor:
             longitude DECIMAL(10,7)
         );
     """)
-    # 3) appointments टेबल
     setup_cursor.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
             id SERIAL PRIMARY KEY,
@@ -65,7 +58,6 @@ with db.cursor() as setup_cursor:
             status VARCHAR(50)
         );
     """)
-    # 4) सैंपल डॉक्टर जोड़ना (अगर टेबल खाली है)
     setup_cursor.execute("SELECT COUNT(*) FROM doctors;")
     if setup_cursor.fetchone()[0] == 0:
         setup_cursor.execute("""
@@ -73,11 +65,9 @@ with db.cursor() as setup_cursor:
             VALUES ('Dr. Rahul Khanna', 'Oncologist', 'Smile Dental Studio', 'Ahmedabad', 'Memnagar');
         """)
     db.commit()
-# ⚠️ ध्यान दें: PostgreSQL के क्वेरीज़ में %s के लिए वेरिएबल्स को टुपल (Tuple) में पास करना ज़रूरी है।
 
 # Helper functions
 def get_specializations():
-    # RealDictCursor का उपयोग करके डेटा को डिक्शनरी फॉर्मेट में निकाला ताकि पुराना कोड न बदले
     cursor = db.cursor(cursor_factory=RealDictCursor)
     cursor.execute("SELECT DISTINCT specialization FROM doctors ORDER BY specialization;")
     specializations = [row['specialization'] for row in cursor.fetchall()]
@@ -125,7 +115,6 @@ def appointment_page():
             user_name=session["user"]["name"] if "user" in session else None,
         )
 
-    # ----- GET request -----
     doctor_id = request.args.get("doctor_id")
     doctor_name = request.args.get("doctor_name")
     specialization = request.args.get("specialization")
@@ -174,7 +163,6 @@ def login():
         password = request.form['password']
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        # check patient table
         cursor.execute("SELECT * FROM users WHERE email=%s AND password=%s LIMIT 1;", (email, password))
         user = cursor.fetchone()
 
@@ -184,7 +172,6 @@ def login():
             cursor.close()
             return redirect(url_for('index'))
 
-        # check doctor table
         cursor.execute("SELECT * FROM doctors WHERE email=%s AND password=%s LIMIT 1;", (email, password))
         doctor = cursor.fetchone()
 
@@ -209,7 +196,6 @@ def register():
         role = request.form['role']
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        # 🔍 Check if email already exists
         cursor.execute("SELECT id FROM users WHERE email=%s UNION SELECT id FROM doctors WHERE email=%s;", (email, email))
         existing = cursor.fetchone()
 
@@ -218,7 +204,6 @@ def register():
             flash("⚠️ This email is already registered. Please log in.", "warning")
             return redirect(url_for('login'))
 
-        # Insert new user
         if role == "patient":
             sql = "INSERT INTO users (name, email, password, role) VALUES (%s, %s, %s, %s);"
             cursor.execute(sql, (name, email, password, role))
@@ -240,7 +225,6 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect(url_for('index'))
 
-# Doctor Dashboard Page
 @app.route('/doctor_dashboard')
 def doctor_dashboard():
     if 'user' not in session or session.get('role') != 'doctor':
@@ -298,30 +282,3 @@ def update_appointment_status():
 def doctors_page():
     specialization = request.args.get('specialization', '')
     location_text = request.args.get('location', '')
-    experience = request.args.get('experience', '')
-
-    lat = request.args.get('lat')
-    lng = request.args.get('lng')
-    radius = float(request.args.get('radius', 5))
-
-    query = "SELECT * FROM doctors WHERE 1=1"
-    params = []
-
-    if specialization:
-        query += " AND specialization LIKE %s"
-        params.append(f"%{specialization}%")
-
-    if location_text:
-        query += " AND (hospital_name LIKE %s OR city LIKE %s OR area LIKE %s)"
-        params.append(f"%{location_text}%")
-        params.append(f"%{location_text}%")
-        params.append(f"%{location_text}%")
-
-    if experience:
-        query += " AND experience >= %s"
-        params.append(experience)
-
-    cursor = db.cursor(cursor_factory=RealDictCursor)
-    cursor.execute(query + ";", tuple(params))
-if __name __ == '__main__':
-    app.run(debug=True)
