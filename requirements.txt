@@ -4,3 +4,4 @@ Flask-Cors
 geopy
 python-dotenv
 google-generativeai
+psycopg2-binary
